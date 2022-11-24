@@ -24,7 +24,21 @@ const AppProvider = ({ children }) => {
   const [correct, setCorrect] = useState(0);
   const [error, setError] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  return <AppContext.Provider value="hello">{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider
+      value={{
+        waiting,
+        loading,
+        questions,
+        index,
+        correct,
+        error,
+        isModalOpen,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 };
 // make sure use
 export const useGlobalContext = () => {
