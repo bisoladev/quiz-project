@@ -50,20 +50,29 @@ const AppProvider = ({ children }) => {
     setIndex((oldIndex) => {
       const index = oldIndex + 1;
       if (index > questions.length - 1) {
-        //openModal()
+        openModal();
         return 0;
       } else {
         return index;
       }
-      return index;
     });
   };
 
-  const checkAnswer = value => {
-    if(value) {
-      setCorrect((oldState)=> oldState + 1)
+  const checkAnswer = (value) => {
+    if (value) {
+      setCorrect((oldState) => oldState + 1);
     }
-    nextQuestion()
+    nextQuestion();
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setWaiting(true);
+    setCorrect(0);
+    setIsModalOpen(false);
   }
   useEffect(() => {
     fetchQuestions(tempUrl);
@@ -80,6 +89,7 @@ const AppProvider = ({ children }) => {
         isModalOpen,
         nextQuestion,
         checkAnswer,
+        closeModal,
       }}
     >
       {children}
